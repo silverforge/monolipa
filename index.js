@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './App';
+import MainView from './src/MainView';
 
-AppRegistry.registerComponent('MoNoLiPa', () => App);
+AppRegistry.registerComponent('MoNoLiPa', () => MainView);
