@@ -15,8 +15,6 @@ export default class MainView extends Component {
             <View style={mainStyle.container}>
                 <View style={mainStyle.subContainer}>
                     <Text style={mainStyle.titleText}>Monoli PA</Text>
-
-
                     <SettingsSwitcher />
                 </View>
             </View>
