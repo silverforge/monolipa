@@ -7,6 +7,7 @@ import {
     Text,
     View
 } from 'react-native';
+import HomeServiceClient from '../network/HomeServiceClient';
 
 export default class SettingsSwitcher extends Component {
 
@@ -15,6 +16,14 @@ export default class SettingsSwitcher extends Component {
         this.state = {
             switched: false
         };
+
+        this._homeServieClient = new HomeServiceClient();
+    }
+
+    async componentWillMount() {
+        let result = await this._homeServieClient.getIamHome();
+        console.log(`::: AMIHOME RESULT ::: ${JSON.stringify(result)}`);
+        this.setState({ switched: result });
     }
 
     render() {
@@ -25,10 +34,17 @@ export default class SettingsSwitcher extends Component {
                     style={switcherStyle.switch}
                     // thumbTintColor={'black'}
                     tintColor={'#5c5d67'}
-                    onValueChange={(value) => this.setState({ switched: value })}
+                    onValueChange={async (value) => {
+                        await this._setIamHome(value);
+                    }}
                     value={this.state.switched} />
             </View>
         );
+    }
+
+    _setIamHome = async (value) => {
+        this.setState({ switched: value });
+        await this._homeServieClient.setIamHome(value);
     }
 }
 
