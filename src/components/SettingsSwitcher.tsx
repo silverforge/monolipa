@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import {
     Platform,
@@ -8,9 +8,14 @@ import {
     View
 } from 'react-native';
 
-export default class SettingsSwitcher extends Component {
+import HomeServiceClient from '../network/HomeServiceClient';
 
-    constructor(props, context) {
+export interface Props { }
+export interface State { switched: boolean; }
+
+export default class SettingsSwitcher extends React.Component<Props, State> {
+
+    constructor(props: any, context: any) {
         super(props, context);
         this.state = {
             switched: false
@@ -23,7 +28,6 @@ export default class SettingsSwitcher extends Component {
                 <Text style={switcherStyle.switcherText}>I'm home</Text>
                 <Switch 
                     style={switcherStyle.switch}
-                    // thumbTintColor={'black'}
                     tintColor={'#5c5d67'}
                     onValueChange={(value) => this.setState({ switched: value })}
                     value={this.state.switched} />

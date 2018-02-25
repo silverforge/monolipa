@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
     Platform,
     StyleSheet,
@@ -8,7 +8,7 @@ import {
 
 import SettingsSwitcher from './components/SettingsSwitcher';
 
-export default class MainView extends Component {
+export default class MainView extends React.Component {
 
     render() {
         return(
