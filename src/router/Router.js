@@ -11,7 +11,20 @@ export const Screens = StackNavigator({
     Monoli: { screen: MonoliScreen },
 }, {
     initialRouteName: 'Monoli',
-    headerMode: 'screen'
+    headerMode: 'screen',
+    navigationOptions: {
+        headerStyle: {
+            backgroundColor: AppColors.NavigationControlBackgroud2,
+        },
+        headerTintColor: AppColors.Highlite,
+        headerTitleStyle: {
+            fontFamily: 'Rubik',
+            fontStyle: 'normal',
+            fontWeight: '300',
+            fontSize: 22,
+            marginVertical: 8
+        }        
+    }
 });
 
 export const Tabs = TabNavigator({
