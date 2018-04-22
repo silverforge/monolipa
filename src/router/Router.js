@@ -28,8 +28,8 @@ export const Tabs = TabNavigator({
         activeBackgroundColor: AppColors.NavigationControlBackgroud,
         inactiveTintColor: AppColors.NavigationControlForegroud2,
         inactiveBackgroundColor: AppColors.NavigationControlBackgroud2,
-        //showIcon: true,
-        //showLabel: false,
+        showIcon: true,
+        showLabel: false,
         style: {
             backgroundColor: AppColors.NavigationControlBackgroud2
         },
@@ -45,3 +45,4 @@ export const Tabs = TabNavigator({
 // https://hackernoon.com/getting-started-with-react-navigation-the-navigation-solution-for-react-native-ea3f4bd786a4
 // https://github.com/react-community/react-navigation/blob/master/docs/api/navigators/TabNavigator.md
 // https://reactnavigation.org/docs/tab-navigator.html
+// https://github.com/oblador/react-native-vector-icons/issues/626

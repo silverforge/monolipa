@@ -5,11 +5,14 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "android-deploy-to-device": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android"
+    "android-deploy-to-device": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android",
+    "postinstall-vector-icons": "rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json"
   },
   "dependencies": {
+    "npm": "^5.8.0",
     "react": "16.2.0",
     "react-native": "0.53.0",
+    "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^1.5.11"
   },
   "devDependencies": {
