@@ -1,4 +1,6 @@
-import { AppRegistry } from 'react-native';
-import MainView from './src/MainView';
+import {StatusBar, AppRegistry } from 'react-native';
+import ShellScreen from './src/views/ShellScreen';
 
-AppRegistry.registerComponent('MoNoLiPa', () => MainView);
+StatusBar.setBarStyle('light-content', true);
+
+AppRegistry.registerComponent('MoNoLiPa', () => ShellScreen);
