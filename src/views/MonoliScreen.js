@@ -7,7 +7,7 @@ import { Tabs } from '../router/Router';
 export default class MonoliScreen extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: 'MoNoLiPa'
+            headerTitle: 'MoNoLi Pa'
         }
     };
 

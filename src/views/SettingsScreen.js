@@ -8,8 +8,7 @@ export default class SettingsScreen extends Component {
     static navigationOptions = {
         title: 'Settings', 
         tabBarLabel: 'settings',
-        tabBarIcon: ({focused, tintColor}) => (<Icon name="settings-outline" color={tintColor} size={26} />),
-//        header: null
+        tabBarIcon: ({focused, tintColor}) => (<Icon name="settings-outline" color={tintColor} size={26} />)
     };
 
     render() {
