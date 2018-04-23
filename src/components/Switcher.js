@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-    Platform,
     Switch,
     StyleSheet,
     Text,
@@ -44,7 +43,7 @@ const switcherStyle = StyleSheet.create({
         fontSize: 20, 
         marginHorizontal: 8,
         fontFamily: 'Lora-Regular', 
-        color: '#5c5d67'
+        color: AppColors.TextColor
     },
     switch: {
         marginHorizontal: 16

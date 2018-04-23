@@ -5,6 +5,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Switcher from '../components/Switcher';
+import CounterTime from '../components/CounterTime';
 
 export default class HomeScreen extends Component {
 
@@ -18,6 +19,7 @@ export default class HomeScreen extends Component {
         return (
             <View>
                 <Switcher caption={"I'm home"} />
+                <CounterTime />
                 <Switcher caption={"Notifications"} />
             </View>
         );

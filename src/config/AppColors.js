@@ -6,4 +6,5 @@ export default class AppColors {
     static Highlite = colors.WHITE_SMOKE;
     static NavigationControlForegroud = colors.WHITE_SMOKE;
     static NavigationControlForegroud2 = colors.PALE_CHESSNUT;
+    static TextColor = colors.RAISIN_BLACK;
 }
