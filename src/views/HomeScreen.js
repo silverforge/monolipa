@@ -25,12 +25,25 @@ class HomeScreen extends Component {
     constructor(props, context) {
         super(props, context);
         
+        this.state = {
+            countdown: "00:00:00"
+        }
+
         this.homeServiceClient = new HomeServiceClient();
     }
 
     async componentWillMount() {
-        let result = await this.homeServiceClient.getIamHome();
-        this.props.updateIAmHome(result);
+        await this._getData();
+    }
+
+    componentDidMount() {
+        this._interval = setInterval(async () => {
+            await this._getData();
+        }, 60000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this._interval);
     }
 
     render() {
@@ -43,7 +56,7 @@ class HomeScreen extends Component {
                     switched={this.props.iamhome} 
                     onChange={async (value) => await this._handleIamHomeSwitcherChanged(value)}
                     />
-                <CounterTime />
+                <CounterTime time={this.state.countdown} />
                 <Switcher 
                     caption={"Notifications"}
                     switched={false}
@@ -56,6 +69,33 @@ class HomeScreen extends Component {
     _handleIamHomeSwitcherChanged = async (value) => {
         this.props.updateIAmHome(value);
         await this.homeServiceClient.setIamHome(value);
+        await this._getData();
+    }
+
+    _getData = async () => {
+        await this._amIHome();
+        await this._setHourMin();
+    }
+
+    _amIHome = async () => {
+        let result = await this.homeServiceClient.getIamHome();
+        console.log(` ::: IH ::: ${JSON.stringify(result)} `);
+
+        this.props.updateIAmHome(result);        
+    }
+
+    async _setHourMin() {
+        if (this.props.iamhome) {
+            let countDownTimeSpan = await this.homeServiceClient.getCountDownTime();
+            // console.log(` ::: CT ::: ${JSON.stringify(countDownTimeSpan)} `);
+
+            let hourMin = countDownTimeSpan.substring(0, 5);
+            console.log(` ::: HM ::: ${JSON.stringify(hourMin)} `);
+
+            this.setState({ countdown: hourMin });
+        } else {
+            this.setState({ countdown: "00:00" });
+        }
     }
 }
 

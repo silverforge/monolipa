@@ -12,7 +12,7 @@ export default class CounterTime extends Component {
     render() {
         return(
             <View style={styles.container}>
-                <Text style={styles.text}>00:00:00</Text>
+                <Text style={styles.text}>{this.props.time}</Text>
             </View>
         );
     }
