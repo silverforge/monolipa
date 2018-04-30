@@ -20,11 +20,17 @@ class HomeScreen extends Component {
         tabBarLabel: 'home',
         tabBarIcon: ({focused, tintColor}) => (<Icon name="home-assistant" color={tintColor} size={26} />)
     };
-    
+
     render() {
+        console.log(` ::: HOME PROPS ::: ${JSON.stringify(this.props)} `);
+        
         return (
             <View>
-                <Switcher caption={"I'm home"} />
+                <Switcher 
+                    caption={"I'm home"} 
+                    switched={this.props.iamhome} 
+                    onChange={(value) => this.props.updateIAmHome(value)}
+                    />
                 <CounterTime />
                 <Switcher caption={"Notifications"} />
             </View>
@@ -36,6 +42,9 @@ class HomeScreen extends Component {
 // and insert/links it into the props of our component.
 // This function makes Redux know that this component needs to be passed a piece of the state
 function mapStateToProps(state, props) {
+
+    console.log(` ::: HOME STATE ::: ${JSON.stringify(state)} `);
+
     return {
         iamhome: state.iamhome
     }
@@ -45,6 +54,7 @@ function mapStateToProps(state, props) {
 // while wrapping them in dispatch() so that they immediately dispatch an Action.
 // Just by doing this, we will have access to the actions defined in out actions file (action/home.js)
 function mapDispatchToProps(dispatch) {
+
     return bindActionCreators(Actions, dispatch);
 }
 

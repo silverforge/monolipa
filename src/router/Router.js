@@ -41,7 +41,7 @@ export const AppNavigator = StackNavigator({
             backgroundColor: AppColors.NavigationControlBackgroud2,
             paddingVertical: 4
         },
-        headerTitle: 'MoNoLi Pa',
+        headerTitle: 'MoNoLi PA',
         headerTintColor: AppColors.Highlite,
         headerTitleStyle: {
             fontFamily: 'Rubik',
