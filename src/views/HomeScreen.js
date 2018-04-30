@@ -32,7 +32,11 @@ class HomeScreen extends Component {
                     onChange={(value) => this.props.updateIAmHome(value)}
                     />
                 <CounterTime />
-                <Switcher caption={"Notifications"} />
+                <Switcher 
+                    caption={"Notifications"}
+                    switched={false}
+                    onChange={(value) => console.log(`ALMA`)}
+                    />
             </View>
         );
     }
