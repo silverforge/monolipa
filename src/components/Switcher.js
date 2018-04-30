@@ -6,28 +6,37 @@ import {
     View
 } from 'react-native';
 
+import PropTypes from 'prop-types';
+
 import AppColors from '../config/AppColors';
 
 export default class Switcher extends Component {
 
+    static propTypes = {
+        caption: PropTypes.string.isRequired,
+        switched: PropTypes.bool.isRequired,
+        onChange: PropTypes.func.isRequired
+    };
+
     constructor(props, context) {
         super(props, context);
-        this.state = {
-            switched: false
-        };
     }
 
     render() {
+        // console.log(` ::: SWITCHER PROPS ::: ${JSON.stringify(this.props)} `);
+
         return (
             <View style={switcherStyle.container}>
                 <Text style={switcherStyle.switcherText}>{this.props.caption}</Text>
                 <Switch 
                     style={switcherStyle.switch}
-                    // thumbTintColor={'black'}
-                    tintColor={AppColors.NavigationControlBackgroud}
-                    onValueChange={async (value) => {
+                    thumbTintColor={AppColors.ButtonFace}
+                    tintColor={AppColors.ButtonBackground}
+                    onValueChange={(value) => {
+                        // console.log(` ::: SWITCHER ONCHANGE ::: ${JSON.stringify(value)} `);
+                        this.props.onChange(value);
                     }}
-                    value={this.state.switched} />
+                    value={this.props.switched} />
             </View>
         );
     }

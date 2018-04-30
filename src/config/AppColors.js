@@ -7,4 +7,6 @@ export default class AppColors {
     static NavigationControlForegroud = colors.WHITE_SMOKE;
     static NavigationControlForegroud2 = colors.PALE_CHESSNUT;
     static TextColor = colors.RAISIN_BLACK;
+    static ButtonFace = colors.GUN_METAL;
+    static ButtonBackground = colors.FAWN;
 }

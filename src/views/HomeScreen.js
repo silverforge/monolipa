@@ -2,26 +2,82 @@ import React, { Component } from 'react';
 import {
     View
 } from 'react-native';
+
+import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+
+import * as Actions from '../actions';
+
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Switcher from '../components/Switcher';
 import CounterTime from '../components/CounterTime';
+import HomeServiceClient from '../network/HomeServiceClient';
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
 
-    static navigationOptions = {
+    static navigationOptions = ({ navigation, screenProps }) => ({
         title: 'Home', 
         tabBarLabel: 'home',
         tabBarIcon: ({focused, tintColor}) => (<Icon name="home-assistant" color={tintColor} size={26} />)
-    };
-    
+    });
+
+    constructor(props, context) {
+        super(props, context);
+        
+        this.homeServiceClient = new HomeServiceClient();
+    }
+
+    async componentWillMount() {
+        let result = await this.homeServiceClient.getIamHome();
+        this.props.updateIAmHome(result);
+    }
+
     render() {
+        // console.log(` ::: HOME PROPS ::: ${JSON.stringify(this.props)} `);
+        
         return (
             <View>
-                <Switcher caption={"I'm home"} />
+                <Switcher 
+                    caption={"I'm home"} 
+                    switched={this.props.iamhome} 
+                    onChange={async (value) => await this._handleIamHomeSwitcherChanged(value)}
+                    />
                 <CounterTime />
-                <Switcher caption={"Notifications"} />
+                <Switcher 
+                    caption={"Notifications"}
+                    switched={false}
+                    onChange={(value) => console.log(`ALMA`)}
+                    />
             </View>
         );
     }
+
+    _handleIamHomeSwitcherChanged = async (value) => {
+        this.props.updateIAmHome(value);
+        await this.homeServiceClient.setIamHome(value);
+    }
 }
+
+// The function takes data from the app current state,
+// and insert/links it into the props of our component.
+// This function makes Redux know that this component needs to be passed a piece of the state
+function mapStateToProps(state, props) {
+
+    // console.log(` ::: HOME STATE ::: ${JSON.stringify(state)} `);
+
+    return {
+        iamhome: state.iamhome
+    }
+}
+
+// Doing this merges our actions into the component’s props,
+// while wrapping them in dispatch() so that they immediately dispatch an Action.
+// Just by doing this, we will have access to the actions defined in out actions file (action/home.js)
+function mapDispatchToProps(dispatch) {
+
+    return bindActionCreators(Actions, dispatch);
+}
+
+//Connect everything
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
