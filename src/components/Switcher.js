@@ -23,7 +23,7 @@ export default class Switcher extends Component {
     }
 
     render() {
-        console.log(` ::: SWITCHER PROPS ::: ${JSON.stringify(this.props)} `);
+        // console.log(` ::: SWITCHER PROPS ::: ${JSON.stringify(this.props)} `);
 
         return (
             <View style={switcherStyle.container}>
@@ -33,7 +33,7 @@ export default class Switcher extends Component {
                     thumbTintColor={AppColors.ButtonFace}
                     tintColor={AppColors.ButtonBackground}
                     onValueChange={(value) => {
-                        console.log(` ::: SWITCHER ONCHANGE ::: ${JSON.stringify(value)} `);
+                        // console.log(` ::: SWITCHER ONCHANGE ::: ${JSON.stringify(value)} `);
                         this.props.onChange(value);
                     }}
                     value={this.props.switched} />

@@ -12,24 +12,36 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Switcher from '../components/Switcher';
 import CounterTime from '../components/CounterTime';
+import HomeServiceClient from '../network/HomeServiceClient';
 
 class HomeScreen extends Component {
 
-    static navigationOptions = {
+    static navigationOptions = ({ navigation, screenProps }) => ({
         title: 'Home', 
         tabBarLabel: 'home',
         tabBarIcon: ({focused, tintColor}) => (<Icon name="home-assistant" color={tintColor} size={26} />)
-    };
+    });
+
+    constructor(props, context) {
+        super(props, context);
+        
+        this.homeServiceClient = new HomeServiceClient();
+    }
+
+    async componentWillMount() {
+        let result = await this.homeServiceClient.getIamHome();
+        this.props.updateIAmHome(result);
+    }
 
     render() {
-        console.log(` ::: HOME PROPS ::: ${JSON.stringify(this.props)} `);
+        // console.log(` ::: HOME PROPS ::: ${JSON.stringify(this.props)} `);
         
         return (
             <View>
                 <Switcher 
                     caption={"I'm home"} 
                     switched={this.props.iamhome} 
-                    onChange={(value) => this.props.updateIAmHome(value)}
+                    onChange={async (value) => await this._handleIamHomeSwitcherChanged(value)}
                     />
                 <CounterTime />
                 <Switcher 
@@ -40,6 +52,11 @@ class HomeScreen extends Component {
             </View>
         );
     }
+
+    _handleIamHomeSwitcherChanged = async (value) => {
+        this.props.updateIAmHome(value);
+        await this.homeServiceClient.setIamHome(value);
+    }
 }
 
 // The function takes data from the app current state,
@@ -47,7 +64,7 @@ class HomeScreen extends Component {
 // This function makes Redux know that this component needs to be passed a piece of the state
 function mapStateToProps(state, props) {
 
-    console.log(` ::: HOME STATE ::: ${JSON.stringify(state)} `);
+    // console.log(` ::: HOME STATE ::: ${JSON.stringify(state)} `);
 
     return {
         iamhome: state.iamhome
