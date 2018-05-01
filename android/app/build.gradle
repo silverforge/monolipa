@@ -93,7 +93,7 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
-def pass = getPassword("jana", "android_keystore")
+def pass = getPassword("jana", "monoli_release_key")
 
 android {
     compileSdkVersion 23
